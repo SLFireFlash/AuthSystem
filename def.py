@@ -44,7 +44,8 @@ def LogIn():
         print("\n\t 1 To LogIn\n\t 2 To SignUp\n\t 0 To Exit")
         logAns = input("\n\t:")
         if logAns == '1':
-            print("login")
+            userCheck()
+            break
         elif logAns == '2':
             SignUp()
         elif logAns == '0':
@@ -106,7 +107,51 @@ def SignUp():
             print("Press Enter To Exit")
             input()
             exit()
+def Lkeygen(pkey):
+  return pkey[::-1]  
+def userCheck():
+    print("===welcome to PY Boost LogIn===")
+    print('===============================')
+    while True:
+        username = input("Enter Your UserName:")
+        checkname = GetFireData(username)
+        if checkname == True:
+            with open('env/config.json','r')as readConfig:
+                configData = json.load(readConfig)
+            if len(configData['Product']['product_key']) ==0:
+                print("Product Key Not found please Sign up before log in")
+            else:
+                while True:
+                    password = input("enter Your Password:")
+                    doc_ref = db.collection(u'users').document(username)
+                    doc = doc_ref.get()
+                    doc = doc.to_dict()
+                    if password == doc['Password']:
+                        proid = configData['Product']['product_key']
+                        proid = Lkeygen(proid)
+                        if proid == doc['LId']:
+                            print("login complte")
+                            break
+                        else:
+                            print("Product Key Invaild")
+                            print("Join Discord server To get support")
+                            print("discord Server: https://discord.gg/VhZPurRWf8")
+                            print("================================================")
+                            print("press enter to exit")
+                            input()
+                            exit()
+                    else:
+                        print("Wrong Passsword")
+                break
 
+
+
+
+                
+            
+
+        else:
+            print("wrong username TryAgin")
 
 
 
