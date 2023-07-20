@@ -77,9 +77,9 @@ def SignUp():
                 
             else:
                 print("You Already SignUp from this device")
-                print("======================================================")
+                print("=====================================================")
                 print("your product key:"+configData['Product']['product_key'])
-                print("======================================================")
+                print("=====================================================")
                 print("IF you forget username or password goto support")
                 print("discord Server: https://discord.gg/VhZPurRWf8")
                 print("================================================")
